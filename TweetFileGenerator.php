@@ -1,7 +1,8 @@
 <?php
-
 require_once('../Sentiment_Analysis/twitter-api-php-master/TwitterAPIExchange.php');
-
+/**
+ * This class contains functions that can generate a file of tweets.
+ */
 class TweetFileGenerator()
 {
     /**
