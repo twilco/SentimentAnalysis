@@ -3,8 +3,10 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-require_once("../Sentiment_Analysis/TweetSanitizer.php");
-require_once("../Sentiment_Analysis/Dictionary.php");
+require_once("../SentimentAnalysis/TweetSanitizer.php");
+require_once("../SentimentAnalysis/Dictionary.php");
+require_once("../SentimentAnalysis/TweetFileGenerator.php")
+require_once('../SentimentAnalysis/config.php');
 
 $dictionary = array();
 $tweet_sanitizer = new TweetSanitizer();
