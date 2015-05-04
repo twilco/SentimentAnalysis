@@ -1,0 +1,8 @@
+<?php
+
+$oauth_access_token = "xxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxx";
+$oauth_access_token_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+$consumer_key = "xxxxxxxxxxxxxxxxx";
+$consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+?>
