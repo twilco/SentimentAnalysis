@@ -1,8 +1,14 @@
 <?php
 
-$oauth_access_token = "xxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxx";
-$oauth_access_token_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-$consumer_key = "xxxxxxxxxxxxxxxxx";
-$consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+$oauth_settings = array(
+    'oauth_access_token' => "xxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx",
+    'oauth_access_token_secret' => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    'consumer_key' => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    'consumer_secret' => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+);
+
+function get_oauth_settings() {
+    return $oauth_settings;
+}
 
 ?>
