@@ -5,6 +5,20 @@ class Database
     private $connection = "";
 
     /**
+     * Database constructor that allows you to connect to a database upon object creation.
+     * @param String $host     Host to connect to
+     * @param String $username Username to authenticate with
+     * @param String $password Password to authenticate with
+     * @param String $database Database to connect to
+     */
+    public function __construct($host = NULL, $username = NULL, $password = NULL, $database = NULL)
+    {
+        if(!is_null($host) && !is_null($username) && !is_null($password) && !is_null($database)) {
+            connect_to_db($host, $username, $password, $database);
+        }
+    }
+
+    /**
      * Establishes connection to the specified MySQL database and stores this
      * connection in the $connection class variable to be used later.
      * @param  String $host     Host to connect to
