@@ -14,7 +14,7 @@ class Database
     public function __construct($host = NULL, $username = NULL, $password = NULL, $database = NULL)
     {
         if(!is_null($host) && !is_null($username) && !is_null($password) && !is_null($database)) {
-            connect_to_db($host, $username, $password, $database);
+            $this->connect_to_db($host, $username, $password, $database);
         }
     }
 
