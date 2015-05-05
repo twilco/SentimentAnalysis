@@ -9,4 +9,16 @@ function get_oauth_settings() {
     );
 }
 
+function get_db_username() {
+    return "MY_USERNAME";
+}
+
+function get_db_host() {
+    return "MY_HOST";
+}
+
+function get_db_password() {
+    return "MY_PASSWORD";
+}
+
 ?>
