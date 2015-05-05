@@ -65,11 +65,11 @@ class Database
     {
         if($this->is_connected()) {
             foreach($tweets as $tweet) {
-                $insert_query = "INSERT INTO `Tweets`(`id`, `text`, `score`, `has_score`, `is_sanitized`)
-                                 VALUES (?, ?, ?, ?, ?)";
+                $insert_query = "INSERT INTO `Tweets`(`id`, `text`, `algo_score`, `has_algo_score`, `baseline_score`, `has_baseline_score`, `is_sanitized`)
+                                 VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 //Bind the parameters into the query
-                mysqli_stmt_bind_param($insert_query, 'isiii', $tweet["id"], $tweet["text"], $tweet["score"], $tweet["has_score"], $tweet["is_sanitized"]);
+                mysqli_stmt_bind_param($insert_query, 'isiiiii', $tweet["id"], $tweet["text"], $tweet["algo_score"], $tweet["has_algo_score"], $tweet["baseline_score"], $tweet["has_baseline_score"], $tweet["is_sanitized"]);
 
                 //Run the query
                 mysqli_query($this->connection, $insert_query) or die(mysqli_error());

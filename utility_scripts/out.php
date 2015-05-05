@@ -16,7 +16,7 @@ $dictionary_inst = new Dictionary();
 $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
 $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
 
-$out = $tweet_data_generator->timeline_tweets_to_db("test", "Sethrogen", "~~~~");
+$out = $tweet_data_generator->timeline_tweets_to_array("Sethrogen", 200);
 
 echo "<pre>";
 print_r($out);

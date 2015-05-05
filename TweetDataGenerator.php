@@ -68,7 +68,13 @@ class TweetDataGenerator
         file_put_contents($file_path, $out_string, FILE_APPEND | LOCK_EX);
     }
 
-    public function timeline_tweets_to_db($db_connection, $username, $tweet_delimiter, $tweet_count = NULL)
+    /**
+     * Gets timeline tweets from the specified user and returns them in an array.
+     * @param  String  $username    Username to get tweets from
+     * @param  Integer $tweet_count Amount of tweets to grab (note that the Twitter API imposes a 200 tweet limit)  
+     * @return array                Associative array of tweets
+     */
+    public function timeline_tweets_to_array($username, $tweet_count = NULL)
     {
         $database = new Database();
         $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
@@ -93,14 +99,16 @@ class TweetDataGenerator
 
         for($i = 0; $i < count($raw_tweet_data); $i++) {
             if($raw_tweet_data[$i]->lang == "en") {
-                $tweets["id_str"] = $raw_tweet_data[$i]->id_str;
-                $tweets["text"] = $raw_tweet_data[$i]->text;
-                $tweets["score"] = 0;
-                $tweets["has_score"] = 0;
-                $tweets["is_sanitized"] = 0;
+                $tweets[$i]["id"] = $raw_tweet_data[$i]->id_str;
+                $tweets[$i]["text"] = $raw_tweet_data[$i]->text;
+                $tweets[$i]["algo_score"] = 0;
+                $tweets[$i]["baseline_score"] = 0;
+                $tweets[$i]["has_algo_score"] = 0;
+                $tweets[$i]["has_baseline_score"] = 0;
+                $tweets[$i]["is_sanitized"] = 0;
             }
         }
 
-
+        return $tweets;
     }
 }
