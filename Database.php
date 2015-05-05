@@ -1,6 +1,7 @@
 <?php
 
-require_once("/car/www/Sentiment_Analysis/TweetSanitizer.php");
+require_once("/var/www/Sentiment_Analysis/TweetSanitizer.php");
+require_once("/var/www/Sentiment_Analysis/fetch_all_assoc.php");
 
 class Database
 {
@@ -102,24 +103,72 @@ class Database
         return $this->save_new_tweets($tweets);
     }
 
-    public function sanitize_tweet($id = NULL, $tweet_id = NULL) 
+    /**
+     * Sanitizes the specified tweet based on the table ID.
+     * @param  Integer $id       ID of the tweet in the table
+     * @return [type]           [description]
+     */
+    public function sanitize_tweet_by_id($id) 
     {
-        if(is_null($id)) {
-            //they want to sanitize based on specific tweet_id
-            if($this->is_connected($this->connection)) {
+        if($this->is_connected($this->connection)) {
+            // $update_statement = $this->connection->prepare("UPDATE Tweets 
+            //                                                 SET text = ?, is_sanitized = 1");
+            // $update_statement->bind_param('s', )
+        } else {
+            return false;
+        }
+    }
 
-            } else {
-                return false;
-            }
-        } else if(is_null($tweet_id)) {
-            //they want to sanitize based on specific table id
-            if($this->is_connected($this->connection)) {
+    /**
+     * Sanitizes the specified tweet based on the ID of the tweet assigned by Twitter.
+     * @param  Integer $twitter_id ID of the tweet assigned by Twitter
+     * @return [type]              [description]
+     */
+    public function sanitize_tweet_by_twitter_id($twitter_id)
+    {
 
-            } else {
-                return false;
+    }
+
+    /**
+     * Grabs the text of the tweet specified by the passed in table ID.
+     * @param  Integer $id Table ID to choose the tweet by
+     * @return String      Text of the tweet selected or false if there is no database connection
+     */
+    public function text_of_tweet_by_id($id)
+    {
+        if($this->is_connected($this->connection)) {
+            $select_statement = $this->connection->prepare("SELECT text
+                                                            FROM Tweets
+                                                            WHERE id = ?");
+            $select_statement->bind_param("s", $id);
+            $select_statement->execute();
+            $select_statement->bind_result($text);
+            while($select_statement->fetch()) {
+                return $text;
             }
         } else {
-            //they didn't pass any parameters in
+            return false;
+        }
+    }
+
+    /**
+     * Grabs the text of the tweet specified by ID assigned to that tweet by Twitter.
+     * @param  Integer $twitter_id ID of the tweet assigned by Twitter
+     * @return String              Text of the tweet selected or false if there is no database connection
+     */
+    public function text_of_tweet_by_twitter_id($twitter_id)
+    {
+        if($this->is_connected($this->connection)) {
+            $select_statement = $this->connection->prepare("SELECT text
+                                                            FROM Tweets
+                                                            WHERE twitter_id = ?");
+            $select_statement->bind_param("s", $twitter_id);
+            $select_statement->execute();
+            $select_statement->bind_result($text);
+            while($select_statement->fetch()) {
+                return $text;
+            }
+        } else {
             return false;
         }
     }

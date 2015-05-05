@@ -18,8 +18,10 @@ $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password()
 // $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
 // $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
 
-$tweets = $tweet_data_generator->timeline_tweets_to_array("Sethrogen", 200);
-echo $sentiment_db->save_new_tweets($tweets);
+// $tweets = $tweet_data_generator->timeline_tweets_to_array("Sethrogen", 200);
+// echo $sentiment_db->save_new_tweets($tweets);
 
-echo "<pre>";
-print_r($tweets);
+echo $sentiment_db->text_of_tweet_by_id(1);
+
+// echo "<pre>";
+// print_r($tweets);
