@@ -1,19 +1,23 @@
 <?php
-require_once('../SentimentAnalysis/twitter-api-php-master/TwitterAPIExchange.php');
-require_once('../SentimentAnalysis/Database.php');
+require_once('/var/www/Sentiment_Analysis/twitter-api-php-master/TwitterAPIExchange.php');
+require_once('/var/www/Sentiment_Analysis/Database.php');
 /**
  * This class contains functions that can generate a file of tweets.
  */
-class TweetDataGenerator()
+class TweetDataGenerator
 {
     /**
      * Settings to connect to Twitter's API.
      * @var array
      */
-    $settings = array();
+    private $settings = array();
 
+    /**
+     * Constructor for TweetDataGenerator.
+     * @param array $settings oAuth settings
+     */
     public function __construct($settings) {
-        $this->$settings = $settings;
+        $this->settings = $settings;
     }
 
     /**
@@ -21,7 +25,7 @@ class TweetDataGenerator()
      * @param StringArray $new_settings New settings for the connection to Twitter's API
      */
     public function set_settings($new_settings) {
-        $this->$settings = $new_settings;
+        $this->settings = $new_settings;
     }
 
     /**
@@ -46,7 +50,7 @@ class TweetDataGenerator()
             exit("Unexpected value received for $tweet_count in function timeline_tweets_to_file: " . $tweet_count);
         }
          
-        $twitter = new TwitterAPIExchange($this->$settings);
+        $twitter = new TwitterAPIExchange($this->settings);
         $tweets = array();
         $raw_tweet_data = $twitter->setGetfield($get_field)
                                   ->buildOauth($url, $request_method)
@@ -66,6 +70,7 @@ class TweetDataGenerator()
 
     public function timeline_tweets_to_db($db_connection, $username, $tweet_delimiter, $tweet_count = NULL)
     {
+        $database = new Database();
         $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
         $request_method = "GET";
         $get_field = "";
@@ -78,21 +83,24 @@ class TweetDataGenerator()
             exit("Unexpected value received for $tweet_count in function timeline_tweets_to_file: " . $tweet_count);
         }
          
-        $twitter = new TwitterAPIExchange($this->$settings);
+        $twitter = new TwitterAPIExchange($this->settings);
         $tweets = array();
         $raw_tweet_data = $twitter->setGetfield($get_field)
                                   ->buildOauth($url, $request_method)
                                   ->performRequest();
 
         $raw_tweet_data = json_decode($raw_tweet_data);
-        $out_string = "";
 
         for($i = 0; $i < count($raw_tweet_data); $i++) {
             if($raw_tweet_data[$i]->lang == "en") {
-                $out_string .= $tweet_delimiter . $raw_tweet_data[$i]->text;
+                $tweets["id_str"] = $raw_tweet_data[$i]->id_str;
+                $tweets["text"] = $raw_tweet_data[$i]->text;
+                $tweets["score"] = 0;
+                $tweets["has_score"] = 0;
+                $tweets["is_sanitized"] = 0;
             }
         }
 
-        file_put_contents($file_path, $out_string, FILE_APPEND | LOCK_EX);
+
     }
 }

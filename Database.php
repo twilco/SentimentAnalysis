@@ -1,8 +1,8 @@
 <?php
 
-class Database()
+class Database
 {
-    $connection = "";
+    private $connection = "";
 
     /**
      * Establishes connection to the specified MySQL database and stores this
@@ -14,8 +14,8 @@ class Database()
      */
     public function connect_to_db($host, $username, $password, $database) 
     {
-        $this->$connection = new mysqli($host, $username, $password, $database);
-        if ($this->$connection->connect_errno) {
+        $this->connection = new mysqli($host, $username, $password, $database);
+        if ($this->connection->connect_errno) {
             echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
     } 
@@ -26,7 +26,7 @@ class Database()
      */
     public function get_connection()
     {
-        return $this->$connection();
+        return $this->connection();
     }
 
     /**
@@ -58,7 +58,7 @@ class Database()
                 mysqli_stmt_bind_param($insert_query, 'isiii', $tweet["id"], $tweet["text"], $tweet["score"], $tweet["has_score"], $tweet["is_sanitized"]);
 
                 //Run the query
-                mysqli_query($this->$connection, $insert_query) or die(mysqli_error());
+                mysqli_query($this->connection, $insert_query) or die(mysqli_error());
             }
             return true;
         } else {

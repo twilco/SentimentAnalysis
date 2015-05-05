@@ -1,4 +1,5 @@
 <?php
+require_once("/var/www/Sentiment_Analysis/Database.php");
 /**
  * This class contains functions that sanitize unneeded information from tweets 
  * before they go to the sentiment analysis step.
@@ -59,6 +60,17 @@ class TweetSanitizer
             return explode($delimiter, $file_string);
         }
         return false;
+    }   
+
+    /**
+     * [db_read_and_tokenize description]
+     * @param  [type] $connection [description]
+     * @param  [type] $delimiter  [description]
+     * @return [type]             [description]
+     */
+    public function db_read_and_tokenize($connection, $delimiter)
+    {
+
     }
 
     /**
@@ -76,5 +88,7 @@ class TweetSanitizer
         }
         return false;
     }
+
+
 }
 ?>

@@ -3,19 +3,19 @@
  * The main goal for this class is to implement several analysis methods to 
  * give a sentiment score to each of the tweets passed into it.
  */
-class Analyzer()
+class Analyzer
 {
     /**
      * The tweets being analyzed and scored.
      * @var array
      */
-    $tweets = array();
+    private $tweets = array();
 
     /**
      * The dictionary being used to score the tweets.
      * @var array
      */
-    $dictionary = array();
+    private $dictionary = array();
 
     /**
      * Constructor to optionally allow initialization of $tweets and $dictionary
@@ -24,11 +24,11 @@ class Analyzer()
      */
     public function __construct($tweets = NULL, $dictionary = NULL) {
         if(!is_null($tweets)) {
-            $this->$tweets;
+            $this->tweets;
         }
 
         if(!is_null($dictionary)) {
-            $this->$dictionary;
+            $this->dictionary;
         }
     }
 
@@ -37,7 +37,7 @@ class Analyzer()
      * @param StringArray $tweets New tweets to be analyzed
      */
     public function set_tweets($tweets) {
-        $this->$tweets = $tweets;
+        $this->tweets = $tweets;
     }
 
     /**
@@ -45,7 +45,7 @@ class Analyzer()
      * @param StringArray $dictionary Dictionary to score from.
      */
     public function set_dictionary($dictionary) {
-        $this->$dictionary = $dictionary;
+        $this->dictionary = $dictionary;
     }
 }
 ?>
