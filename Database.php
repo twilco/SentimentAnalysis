@@ -21,9 +21,18 @@ class Database()
     } 
 
     /**
+     * Returns the current connection stored in the class.
+     * @return DBConnection Current database connection.
+     */
+    public function get_connection()
+    {
+        return $this->$connection();
+    }
+
+    /**
      * Checks to see if the passed in variable is currently connected to a MySQL database.
-     * @param  DB_Connection  $db_connection The connection to test
-     * @return boolean                       Returns true if it is connected, false otherwise
+     * @param  DB_Connection $db_connection The connection to test
+     * @return boolean                      Returns true if it is connected, false otherwise
      */
     public function is_connected($db_connection)
     {
@@ -31,6 +40,30 @@ class Database()
             return true;
         }
         return false;
+    }
+
+    /**
+     * Saves tweets into the database.
+     * @param  array            Array containing tweets to insert into the database.
+     * @return Boolean          True if successful, false if not connected or otherwise unsuccessful
+     */
+    public function save_tweets($tweets)
+    {
+        if($this->is_connected()) {
+            foreach($tweets as $tweet) {
+                $insert_query = "INSERT INTO `Tweets`(`id`, `text`, `score`, `has_score`, `is_sanitized`)
+                                 VALUES (?, ?, ?, ?, ?)";
+
+                //Bind the parameters into the query
+                mysqli_stmt_bind_param($insert_query, 'isiii', $tweet["id"], $tweet["text"], $tweet["score"], $tweet["has_score"], $tweet["is_sanitized"]);
+
+                //Run the query
+                mysqli_query($this->$connection, $insert_query) or die(mysqli_error());
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
