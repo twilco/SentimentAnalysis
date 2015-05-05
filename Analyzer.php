@@ -22,7 +22,7 @@ class Analyzer()
      * @param StringArray $tweets     Tweets being analyzed.
      * @param StringArray $dictionary Sentiment dictionary to utilize
      */
-    function __construct($tweets = NULL, $dictionary = NULL) {
+    public function __construct($tweets = NULL, $dictionary = NULL) {
         if(!is_null($tweets)) {
             $this->$tweets;
         }
@@ -36,7 +36,7 @@ class Analyzer()
      * Sets new value for tweets.
      * @param StringArray $tweets New tweets to be analyzed
      */
-    function set_tweets($tweets) {
+    public function set_tweets($tweets) {
         $this->$tweets = $tweets;
     }
 
@@ -44,7 +44,7 @@ class Analyzer()
      * Sets new dictionary to score from.   
      * @param StringArray $dictionary Dictionary to score from.
      */
-    function set_dictionary($dictionary) {
+    public function set_dictionary($dictionary) {
         $this->$dictionary = $dictionary;
     }
 }

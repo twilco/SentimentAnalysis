@@ -11,7 +11,7 @@ class TweetFileGenerator()
      */
     $settings = array();
 
-    function __construct($settings) {
+    public function __construct($settings) {
         $this->$settings = $settings;
     }
 
@@ -19,7 +19,7 @@ class TweetFileGenerator()
      * Setter for $settings
      * @param StringArray $new_settings New settings for the connection to Twitter's API
      */
-    function set_settings($new_settings) {
+    public function set_settings($new_settings) {
         $this->$settings = $new_settings;
     }
 
@@ -32,7 +32,7 @@ class TweetFileGenerator()
      * @param  String  $tweet_delimiter What to delimit each tweet by
      * @param  Integer $tweet_count     How many tweets to grab (note that the max is 200 per function call, a limit imposed by Twitter's API)
      */
-    function timeline_tweets_to_file($file_path, $username, $tweet_delimiter, $tweet_count = NULL) {
+    public function timeline_tweets_to_file($file_path, $username, $tweet_delimiter, $tweet_count = NULL) {
         $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
         $request_method = "GET";
         $get_field = "";
