@@ -19,7 +19,7 @@ $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password()
 // $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
 
 $tweets = $tweet_data_generator->timeline_tweets_to_array("Sethrogen", 200);
-echo $sentiment_db->save_tweets($tweets);
+echo $sentiment_db->save_new_tweets($tweets);
 
 echo "<pre>";
 print_r($tweets);

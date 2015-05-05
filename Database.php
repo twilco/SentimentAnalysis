@@ -99,7 +99,51 @@ class Database
             $tweets[$i]['text'] = $tweet_sanitizer->complete_sanitization($tweets[$i]['text']);
             $tweets[$i]['is_sanitized'] = 1;
         }
-        return $this->save_tweets($tweets);
+        return $this->save_new_tweets($tweets);
+    }
+
+    public function sanitize_tweet($id = NULL, $tweet_id = NULL) 
+    {
+        if(is_null($id)) {
+            //they want to sanitize based on specific tweet_id
+            if($this->is_connected($this->connection)) {
+
+            } else {
+                return false;
+            }
+        } else if(is_null($tweet_id)) {
+            //they want to sanitize based on specific table id
+            if($this->is_connected($this->connection)) {
+
+            } else {
+                return false;
+            }
+        } else {
+            //they didn't pass any parameters in
+            return false;
+        }
+    }
+
+    /**
+     * Sanitizes all unsanitized tweets.
+     * @return [type] [description]
+     */
+    public function sanitize_all_tweets()
+    {
+        if($this->is_connected($this->connection)) {
+
+        }
+    }
+
+    /**
+     * Sanitize all tweets, even those already marked as sanitized.
+     * @return [type] [description]
+     */
+    public function resanitize_all_tweets()
+    {
+        if($this->is_connected($this->connection)) {
+
+        }
     }
 }
 
