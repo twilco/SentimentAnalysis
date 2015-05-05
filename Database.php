@@ -27,7 +27,7 @@ class Database()
      */
     public function is_connected($db_connection)
     {
-        if($db_connection->stat() !== false) {
+        if($db_connection->ping() !== false) {
             return true;
         }
         return false;
