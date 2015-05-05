@@ -110,10 +110,12 @@ class Database
      */
     public function sanitize_tweet_by_id($id) 
     {
+        $tweet_sanitizer = new TweetSanitizer();
         if($this->is_connected($this->connection)) {
-            // $update_statement = $this->connection->prepare("UPDATE Tweets 
-            //                                                 SET text = ?, is_sanitized = 1");
-            // $update_statement->bind_param('s', )
+            $tweet_text = $this->text_of_tweet_by_id($id);
+            $sanitized_text = $tweet_sanitizer->complete_sanitization($tweet_text);
+
+            //run update
         } else {
             return false;
         }
@@ -126,7 +128,15 @@ class Database
      */
     public function sanitize_tweet_by_twitter_id($twitter_id)
     {
+        $tweet_sanitizer = new TweetSanitizer();
+        if($this->is_connected($this->connection)) {
+            $tweet_text = $this->text_of_tweet_by_twitter_id($twitter_id);
+            $sanitized_text = $tweet_sanitizer->complete_sanitization($tweet_text);
 
+            //run update
+        } else {
+            return false;
+        }
     }
 
     /**
