@@ -6,4 +6,4 @@ This is a tool that determines the sentiment of tweets in the way of a score, an
 2. Strip unnecessary information from these tweets
 3. Semantically analyze the sanitized tweets using several methods, such as dictionary lookup
 
-Thanks to [this project](https://github.com/J7mbo/twitter-api-php) for making it simple to interface with Twitter's API.
+Thanks to [this project](https://github.com/J7mbo/twitter-api-php) for making it simple to interface with Twitter's API.  I also utilized [Lexicoder's](www.lexicoder.com) sentiment dictionary, which is hidden in the source.
