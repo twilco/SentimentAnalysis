@@ -3,7 +3,7 @@ require_once('../SentimentAnalysis/twitter-api-php-master/TwitterAPIExchange.php
 /**
  * This class contains functions that can generate a file of tweets.
  */
-class TweetFileGenerator()
+class TweetDataGenerator()
 {
     /**
      * Settings to connect to Twitter's API.
@@ -62,4 +62,7 @@ class TweetFileGenerator()
 
         file_put_contents($file_path, $out_string, FILE_APPEND | LOCK_EX);
     }
+
+    //timeline_tweets_to_db()
+    //change name of class to TweetDataGenerator
 }
