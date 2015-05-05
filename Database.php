@@ -1,5 +1,7 @@
 <?php
 
+require_once("/car/www/Sentiment_Analysis/TweetSanitizer.php");
+
 class Database
 {
     private $connection = "";
@@ -61,7 +63,7 @@ class Database
      * @param  array            Array containing tweets to insert into the database.
      * @return Boolean          True if successful, false if not connected or otherwise unsuccessful
      */
-    public function save_tweets($tweets)
+    public function save_new_tweets($tweets)
     {
         if($this->is_connected($this->connection)) {
             foreach($tweets as $tweet) {
@@ -83,6 +85,21 @@ class Database
         } else {
             return false;
         }
+    }
+
+    /**
+     * Sanitizes the tweets passed to it, and then saves them to the database.
+     * @param  array $tweets  Associative array of tweets
+     * @return Boolean        True if successful, false if not connected to the database or other errors
+     */
+    public function sanitize_and_save_new_tweets($tweets)
+    {
+        $tweet_sanitizer = new TweetSanitizer();
+        for($i = 0; $i < count($tweets); $i++) {
+            $tweets[$i]['text'] = $tweet_sanitizer->complete_sanitization($tweets[$i]['text']);
+            $tweets[$i]['is_sanitized'] = 1;
+        }
+        return $this->save_tweets($tweets);
     }
 }
 
