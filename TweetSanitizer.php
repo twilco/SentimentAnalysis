@@ -52,7 +52,7 @@ class TweetSanitizer
      * @param  String $delimiter Delimiter to tokenize by
      * @return String array      Array of tokens gathered from the input file.
      */
-    public function read_and_tokenize($file_dir, $delimiter)
+    public function file_read_and_tokenize($file_dir, $delimiter)
     {
         if(is_string($file_dir)) {
             $file_string = file_get_contents($file_dir);
@@ -67,7 +67,7 @@ class TweetSanitizer
      * @param  String $delimiter Delimiter to tokenize by
      * @return String array      Array of sanitized tokens gathered from the input file.
      */
-    public function read_tokenize_sanitize($file_dir, $delimiter)
+    public function file_read_tokenize_sanitize($file_dir, $delimiter)
     {
         if(is_string($file_dir)) {
             $file_string = file_get_contents($file_dir);
