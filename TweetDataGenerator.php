@@ -99,7 +99,7 @@ class TweetDataGenerator
 
         for($i = 0; $i < count($raw_tweet_data); $i++) {
             if($raw_tweet_data[$i]->lang == "en") {
-                $tweets[$i]["id"] = $raw_tweet_data[$i]->id_str;
+                $tweets[$i]["twitter_id"] = $raw_tweet_data[$i]->id_str;
                 $tweets[$i]["text"] = $raw_tweet_data[$i]->text;
                 $tweets[$i]["algo_score"] = 0;
                 $tweets[$i]["baseline_score"] = 0;
