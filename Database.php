@@ -192,6 +192,25 @@ class Database
         }
     }
 
+    public function text_of_all_tweets()
+    {
+        if($this->is_connected($this->connection)) {
+            $return_array = array();
+            $select_statement = $this->connection->prepare("SELECT text
+                                                            FROM Tweets");
+            $select_statement->execute();
+            $select_statement->bind_result($text);
+            $counter = 0;
+            while($select_statement->fetch()) {
+                $return_array[$counter++] = $text;
+            }
+            $select_statement->close();
+            return $return_array;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Sanitizes all unsanitized tweets.
      * @return [type] [description]
