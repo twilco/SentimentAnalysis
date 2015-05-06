@@ -21,7 +21,7 @@ $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password()
 // $tweets = $tweet_data_generator->timeline_tweets_to_array("Sethrogen", 200);
 // echo $sentiment_db->save_new_tweets($tweets);
 
-echo $sentiment_db->text_of_tweet_by_id(1);
+echo $sentiment_db->sanitize_tweet_by_id(2);
 
 // echo "<pre>";
 // print_r($tweets);

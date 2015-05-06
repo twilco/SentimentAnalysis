@@ -114,7 +114,11 @@ class Database
             $tweet_text = $this->text_of_tweet_by_id($id);
             $sanitized_text = $tweet_sanitizer->complete_sanitization($tweet_text);
 
-            if()
+            if($update_statement = $this->connection->prepare("UPDATE Tweets SET text = ?, is_sanitized = 1 WHERE id = ?")) {
+                $update_statement->bind_param("ss", $sanitized_text, $id);
+                $update_statement->execute();
+                $update_statement->close();
+            }
         } else {
             return false;
         }
@@ -132,7 +136,11 @@ class Database
             $tweet_text = $this->text_of_tweet_by_twitter_id($twitter_id);
             $sanitized_text = $tweet_sanitizer->complete_sanitization($tweet_text);
 
-            //run update
+            if($update_statement = $this->connection->prepare("UPDATE Tweets SET text = ?, is_sanitized = 1 WHERE twitter_id = ?")) {
+                $update_statement->bind_param("ss", $sanitized_text, $twitter_id);
+                $update_statement->execute();
+                $update_statement->close();
+            }
         } else {
             return false;
         }
