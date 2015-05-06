@@ -277,9 +277,10 @@ class Database
             for($i = 0; $i < count($tweets); $i++) {
                 $tweets["text"] = $this->sanitize_tweet_by_id($tweets["id"]);
             }
+            return true;
         }
-        return true;
-    }
+        return false;
+    }   
 
     /**
      * Sanitize all tweets, even those already marked as sanitized.
@@ -288,8 +289,13 @@ class Database
     public function resanitize_all_tweets()
     {
         if($this->is_connected($this->connection)) {
-
+            $tweets = $this->text_of_all_tweets();
+            for($i = 0; $i < count($tweets); $i++) {
+                $tweets["text"] = $this->sanitize_tweet_by_id($tweets["id"]);
+            }
+            return true;
         }
+        return false;
     }
 }
 
