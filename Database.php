@@ -104,7 +104,7 @@ class Database
     /**
      * Sanitizes the specified tweet based on the table ID.
      * @param  Integer $id       ID of the tweet in the table
-     * @return [type]           [description]
+     * @return Boolean           True if successful, false if unsuccessful
      */
     public function sanitize_tweet_by_id($id) 
     {
@@ -127,7 +127,7 @@ class Database
     /**
      * Sanitizes the specified tweet based on the ID of the tweet assigned by Twitter.
      * @param  Integer $twitter_id ID of the tweet assigned by Twitter
-     * @return [type]              [description]
+     * @return Boolean             True if successful, false if unsuccessful
      */
     public function sanitize_tweet_by_twitter_id($twitter_id)
     {
