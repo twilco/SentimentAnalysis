@@ -1,7 +1,6 @@
 <?php
 
 require_once("/var/www/Sentiment_Analysis/TweetSanitizer.php");
-require_once("/var/www/Sentiment_Analysis/fetch_all_assoc.php");
 
 class Database
 {

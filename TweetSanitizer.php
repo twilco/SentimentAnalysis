@@ -63,17 +63,6 @@ class TweetSanitizer
     }   
 
     /**
-     * [db_read_and_tokenize description]
-     * @param  [type] $connection [description]
-     * @param  [type] $delimiter  [description]
-     * @return [type]             [description]
-     */
-    public function db_read_and_tokenize($connection, $delimiter)
-    {
-
-    }
-
-    /**
      * Reads, tokenizes, and sanitizes the specified file.
      * @param  String $file_dir   The file being read, tokenized, and sanitized
      * @param  String $delimiter Delimiter to tokenize by
@@ -88,7 +77,5 @@ class TweetSanitizer
         }
         return false;
     }
-
-
 }
 ?>

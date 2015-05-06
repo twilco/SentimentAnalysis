@@ -1,5 +1,6 @@
 <?php
 require_once('/var/www/Sentiment_Analysis/twitter-api-php-master/TwitterAPIExchange.php');
+require_once('/var/www/Sentiment_Analysis/TweetSanitizer.php');
 require_once('/var/www/Sentiment_Analysis/Database.php');
 /**
  * This class contains functions that can generate a file of tweets.
@@ -106,6 +107,51 @@ class TweetDataGenerator
                 $tweets[$i]["has_algo_score"] = 0;
                 $tweets[$i]["has_baseline_score"] = 0;
                 $tweets[$i]["is_sanitized"] = 0;
+            }
+        }
+
+        return $tweets;
+    }
+
+    /**
+     * Gets timeline tweets from the specified user, sanitizes their text, and returns them in an array.
+     * @param  String  $username    Username to get tweets from
+     * @param  Integer $tweet_count Amount of tweets to grab (note that the Twitter API imposes a 200 tweet limit)  
+     * @return array                Associative array of tweets
+     */
+    public function sanitized_timeline_tweets_to_array($username, $tweet_count = NULL)
+    {
+        $database = new Database();
+        $tweet_sanitizer = new TweetSanitizer();
+        $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        $request_method = "GET";
+        $get_field = "";
+
+        if(is_null($tweet_count)) {
+            $get_field = '?screen_name='.$username.'&count=200&trim_user=true';
+        } else if(is_numeric($tweet_count)) {
+            $get_field = '?screen_name='.$username.'&count='.$tweet_count.'&trim_user=true';
+        } else {
+            exit("Unexpected value received for $tweet_count in function timeline_tweets_to_file: " . $tweet_count);
+        }
+         
+        $twitter = new TwitterAPIExchange($this->settings);
+        $tweets = array();
+        $raw_tweet_data = $twitter->setGetfield($get_field)
+                                  ->buildOauth($url, $request_method)
+                                  ->performRequest();
+
+        $raw_tweet_data = json_decode($raw_tweet_data);
+
+        for($i = 0; $i < count($raw_tweet_data); $i++) {
+            if($raw_tweet_data[$i]->lang == "en") {
+                $tweets[$i]["twitter_id"] = $raw_tweet_data[$i]->id_str;
+                $tweets[$i]["text"] = $tweet_sanitizer->complete_sanitization($raw_tweet_data[$i]->text);
+                $tweets[$i]["algo_score"] = 0;
+                $tweets[$i]["baseline_score"] = 0;
+                $tweets[$i]["has_algo_score"] = 0;
+                $tweets[$i]["has_baseline_score"] = 0;
+                $tweets[$i]["is_sanitized"] = 1;
             }
         }
 
