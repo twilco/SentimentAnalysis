@@ -82,9 +82,8 @@ class Database
                 mysqli_execute($prepared_query) or die(mysqli_error($this->connection));
             }
             return true;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
 
     /**
@@ -118,10 +117,11 @@ class Database
                 $update_statement->bind_param("ss", $sanitized_text, $id);
                 $update_statement->execute();
                 $update_statement->close();
+                return true;
             }
-        } else {
             return false;
-        }
+        } 
+        return false;
     }
 
     /**
@@ -140,10 +140,11 @@ class Database
                 $update_statement->bind_param("ss", $sanitized_text, $twitter_id);
                 $update_statement->execute();
                 $update_statement->close();
+                return true;
             }
-        } else {
             return false;
-        }
+        } 
+        return false;
     }
 
     /**
@@ -160,13 +161,13 @@ class Database
             $select_statement->bind_param("s", $id);
             $select_statement->execute();
             $select_statement->bind_result($text);
-            while($select_statement->fetch()) {
+            while($select_statement->fetch()) {            
+                $select_statement->close();
                 return $text;
             }
-            $select_statement->close();
-        } else {
-            return false;
+
         }
+        return false;
     }
 
     /**
@@ -184,12 +185,12 @@ class Database
             $select_statement->execute();
             $select_statement->bind_result($text);
             while($select_statement->fetch()) {
+                $select_statement->close();
                 return $text;
             }
-            $select_statement->close();
-        } else {
-            return false;
-        }
+            
+        } 
+        return false;
     }
 
     /**
@@ -211,9 +212,8 @@ class Database
             }
             $select_statement->close();
             return $return_array;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
 
     /**
@@ -236,9 +236,8 @@ class Database
             }
             $select_statement->close();
             return $return_array;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
 
     /**
@@ -261,9 +260,8 @@ class Database
             }
             $select_statement->close();
             return $return_array;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
 
     /**
