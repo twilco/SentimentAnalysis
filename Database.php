@@ -114,7 +114,7 @@ class Database
             $tweet_text = $this->text_of_tweet_by_id($id);
             $sanitized_text = $tweet_sanitizer->complete_sanitization($tweet_text);
 
-            //run update
+            if()
         } else {
             return false;
         }
@@ -155,6 +155,7 @@ class Database
             while($select_statement->fetch()) {
                 return $text;
             }
+            $select_statement->close();
         } else {
             return false;
         }
@@ -177,6 +178,7 @@ class Database
             while($select_statement->fetch()) {
                 return $text;
             }
+            $select_statement->close();
         } else {
             return false;
         }
