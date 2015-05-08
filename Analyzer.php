@@ -47,5 +47,23 @@ class Analyzer
     public function set_dictionary($dictionary) {
         $this->dictionary = $dictionary;
     }
+
+    /**
+     * Assigns score based on the presence of certain emojis. 
+     * @param  array $tweets  Tweets to analyze 
+     * @return array          Tweets with their newly modified scores
+     */
+    public function analyze_emojis($tweets)
+    {
+        for($i = 0; $i < count($tweets); $i++) {
+            //laughing crying emoji
+            if(strpos($tweets[$i]["text"], strval(😂))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+        }
+
+        return $tweets;
+    }
 }
 ?>
