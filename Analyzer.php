@@ -56,6 +56,18 @@ class Analyzer
     }
 
     /**
+     * Returns the dictionary class variable.
+     * @return StringArray Sentiment dictionary to score tweets from
+     */
+    public function get_dictionary()
+    {
+        if(empty($this->dictionary)) {
+            exit("Dictionary not set before Analyzer.php's get_dictionary() call.");
+        }
+        return $this->dictionary;
+    }
+
+    /**
      * Performs all analysis operations on the passed in (by reference) tweets.
      * @param  StringArray &$tweets Tweets, passed in by reference, which get their sentiment score modified
      */
@@ -76,7 +88,14 @@ class Analyzer
         if(!is_null($dictionary)) {
             $this->set_dictionary($dictionary);
         }
-        
+
+        $dictionary = $this->get_dictionary();
+
+        for($i = 0; $i < count($tweets); $i++) {
+            for($j = 0; $j < count($dictionary); $j++) {
+                
+            }
+        }
     }
 
     /**
