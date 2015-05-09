@@ -22,7 +22,8 @@ class Analyzer
      * @param StringArray $tweets     Tweets being analyzed.
      * @param StringArray $dictionary Sentiment dictionary to utilize
      */
-    public function __construct($tweets = NULL, $dictionary = NULL) {
+    public function __construct($tweets = NULL, $dictionary = NULL) 
+    {
         if(!is_null($tweets)) {
             $this->tweets;
         }
@@ -36,7 +37,8 @@ class Analyzer
      * Sets new value for tweets.
      * @param StringArray $tweets New tweets to be analyzed
      */
-    public function set_tweets($tweets) {
+    public function set_tweets($tweets) 
+    {
         $this->tweets = $tweets;
     }
 
@@ -44,29 +46,54 @@ class Analyzer
      * Sets new dictionary to score from.   
      * @param StringArray $dictionary Dictionary to score from.
      */
-    public function set_dictionary($dictionary) {
-        $this->dictionary = $dictionary;
+    public function set_dictionary($dictionary) 
+    {
+        if(is_array($dictionary)) {
+            $this->dictionary = $dictionary;
+        } else {
+            exit("Expected array in Analyzer.php's set_dictionary method, got: " . $dictionary);
+        }
+    }
+
+    /**
+     * Performs all analysis operations on the passed in (by reference) tweets.
+     * @param  StringArray &$tweets Tweets, passed in by reference, which get their sentiment score modified
+     */
+    public function complete_analyzation(&$tweets)
+    {
+        $this->analyze_emojis($tweets);
+        $this->analyze_dictionary($tweets);
+    }
+
+    /**
+     * Performs a dictionary analysis on the passed in tweets, increasing sentiment score for postive words
+     * and decreasing sentiment score for negative words.
+     * @param  StringArray &$tweets Tweets, passed in by reference, which get their sentiment score modified
+     * @param  StringArray $dictionary Optional parameter which sets the dictionary to use in the class variable $dictionary
+     */
+    public function analyze_dictionary(&$tweets, $dictionary = NULL)
+    {
+        if(!is_null($dictionary)) {
+            $this->set_dictionary($dictionary);
+        }
+        
     }
 
     /**
      * Assigns score based on the presence of certain emojis. 
-     * @param  array $tweets  Tweets to analyze 
-     * @return array          Tweets with their newly modified scores
+     * @param  array &$tweets  Tweets to analyze 
      */
     public function analyze_emojis(&$tweets)
     {
         $this->analyze_positive_emojis($tweets);
         $this->analyze_negative_emojis($tweets);
-
-        return $tweets;
     }
 
     /**
      * Increases sentiment score based on the presence of certain emojis.
      * The comment descriptions are exactly as they appear on this website:
      * http://www.iemoji.com/
-     * @param  array $tweets  Tweets to analyze 
-     * @return array          Tweets with their newly modified scores
+     * @param  array &$tweets  Tweets to analyze 
      */
     public function analyze_positive_emojis(&$tweets)
     {
@@ -372,8 +399,7 @@ class Analyzer
      * Decreases sentiment score based on the presence of certain emojis.
      * The comment descriptions are exactly as they appear on this website:
      * http://www.iemoji.com/
-     * @param  array $tweets  Tweets to analyze 
-     * @return array          Tweets with their newly modified scores
+     * @param  array &$tweets  Tweets to analyze 
      */
     public function analyze_negative_emojis(&$tweets)
     {
