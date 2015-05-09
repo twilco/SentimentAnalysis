@@ -51,7 +51,7 @@ echo $sentiment_db->tweet_exists_by_id(1);
 
 
 
-//echo $sentiment_db->save_new_tweets($tweets);
+//echo $sentiment_db->save_tweets($tweets);
 
 //print_r($sentiment_db->text_of_all_sanitized_tweets());
 
