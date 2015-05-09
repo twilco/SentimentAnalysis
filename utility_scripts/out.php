@@ -33,17 +33,17 @@ $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis
     
 
 
-echo $sentiment_db->tweet_exists_by_id(1);
+// echo $sentiment_db->tweet_exists_by_id(1);
 
 
 
 
-// $tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
-// $analyzer->analyze_emojis($tweets);
-// $analyzer->analyze_dictionary($tweets, $dictionary);
-// for($i = 0; $i < count($tweets); $i++) {
-//     echo 'SCORE: ' . $tweets[$i]["algo_score"] . '      -----------------  TEXT: ' . $tweets[$i]["text"] . '<br>';
-// }
+$tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
+$analyzer->analyze_emojis($tweets);
+$analyzer->analyze_dictionary($tweets, $dictionary);
+for($i = 0; $i < count($tweets); $i++) {
+    echo 'SCORE: ' . $tweets[$i]["algo_score"] . '      -----------------  TEXT: ' . $tweets[$i]["text"] . '<br>';
+}
 
 
 

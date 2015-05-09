@@ -67,7 +67,7 @@ class Database
     {
         if($this->is_connected($this->connection)) {
             foreach($tweets as $tweet) {
-                if(tweet_exists_by_twitter_id($tweet["twitter_id"])) {
+                if($this->tweet_exists_by_twitter_id($tweet["twitter_id"])) {
                     //tweet already exists - let's do an update rather than an insert
                 } else {
                     //tweet doesn't already previously exist - let's do an insert
