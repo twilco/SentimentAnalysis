@@ -93,8 +93,12 @@ class Analyzer
 
         for($i = 0; $i < count($tweets); $i++) {
             for($j = 0; $j < count($dictionary); $j++) {
-                
+                if(strpos($tweets[$i]['text'], strtolower($dictionary[$j]['word'])) !== false) {
+                    //found a match from the current dictionary word to the tweet
+                    $tweets[$i]['algo_score'] = $tweets[$i]['algo_score'] + $dictionary[$j]['score_modifier'];
+                }
             }
+            $tweets[$i]['has_algo_score'] = 1;
         }
     }
 
@@ -120,297 +124,249 @@ class Analyzer
             //face with tears of joy
             if(strpos($tweets[$i]["text"], strval(😂))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //smiling face with open mouth and smiling eyes
             if(strpos($tweets[$i]["text"], strval(😄))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //smiling face with open mouth
             if(strpos($tweets[$i]["text"], strval(😃))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //grinning mouth
             if(strpos($tweets[$i]["text"], strval(😀))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //smiling face with smiling eyes
             if(strpos($tweets[$i]["text"], strval(😊))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //white smiling face
             if(strpos($tweets[$i]["text"], strval(☺)) !== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //winking face
             if(strpos($tweets[$i]["text"], strval(😉))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }    
 
             //smiling face with heart shaped eyes
             if(strpos($tweets[$i]["text"], strval(😍)) !== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }        
 
             //face throwing a kiss
             if(strpos($tweets[$i]["text"], strval(😘)) !== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //kissing face with closed eyes
             if(strpos($tweets[$i]["text"], strval(😚)) !== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //kissing face
             if(strpos($tweets[$i]["text"], strval(😗))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //kissing face with smiling eyes
             if(strpos($tweets[$i]["text"], strval(😙))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //relieved face
             if(strpos($tweets[$i]["text"], strval(😌))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //smiling face with open mouth and tightly closed eyes
             if(strpos($tweets[$i]["text"], strval(😆))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
 
             //face savoring delicious food
             if(strpos($tweets[$i]["text"], strval(😋))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //smiling face with sunglasses
             if(strpos($tweets[$i]["text"], strval(😎))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //smiling face with halo
             if(strpos($tweets[$i]["text"], strval(😇))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //smirking face
             if(strpos($tweets[$i]["text"], strval(😏))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //man with gua pi mao
             if(strpos($tweets[$i]["text"], strval(👲))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //man with turban
             if(strpos($tweets[$i]["text"], strval(👳))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //baby
             if(strpos($tweets[$i]["text"], strval(👶))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //boy
             if(strpos($tweets[$i]["text"], strval(👦))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //girl
             if(strpos($tweets[$i]["text"], strval(👧))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //person with blond hair
             if(strpos($tweets[$i]["text"], strval(👱))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //smiling cat face with open mouth
             if(strpos($tweets[$i]["text"], strval(😺))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //smiling cat face with heart shaped eyes
             if(strpos($tweets[$i]["text"], strval(😻))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //kissing cat face with closed eyes
             if(strpos($tweets[$i]["text"], strval(😽))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //thumbs up
             if(strpos($tweets[$i]["text"], strval(👍))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //kiss mark
             if(strpos($tweets[$i]["text"], strval(💋))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //thumbs up
             if(strpos($tweets[$i]["text"], strval(👍))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //love letter
             if(strpos($tweets[$i]["text"], strval(💌))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //heart with arrow
             if(strpos($tweets[$i]["text"], strval(💘))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //revolving hearts
             if(strpos($tweets[$i]["text"], strval(💞))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //sparkling heart
             if(strpos($tweets[$i]["text"], strval(💖))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //two hearts
             if(strpos($tweets[$i]["text"], strval(💕))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //beating heart
             if(strpos($tweets[$i]["text"], strval(💓))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }            
 
             //growing heart
             if(strpos($tweets[$i]["text"], strval(💗))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //heavy black heart (picture is red though)
             if(strpos($tweets[$i]["text"], strval(❤))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //green heart
             if(strpos($tweets[$i]["text"], strval(💚))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //purple heart
             if(strpos($tweets[$i]["text"], strval(💜))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //blue heart
             if(strpos($tweets[$i]["text"], strval(💙))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //yellow heart
             if(strpos($tweets[$i]["text"], strval(💛))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //bride with veil
             if(strpos($tweets[$i]["text"], strval(👰))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //hair cut
             if(strpos($tweets[$i]["text"], strval(💇))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //couple with heart
             if(strpos($tweets[$i]["text"], strval(💑))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //kiss
             if(strpos($tweets[$i]["text"], strval(💏))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //family
             if(strpos($tweets[$i]["text"], strval(👪))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //man and woman holding hands
             if(strpos($tweets[$i]["text"], strval(👫))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
 
             //cat face with tears of joy
             if(strpos($tweets[$i]["text"], strval(😹))!== false) {
                 $tweets[$i]["algo_score"]++;
-                $tweets[$i]["has_algo_score"] = 1;
             }
+            $tweets[$i]["has_algo_score"] = 1;  
         }
     }
 
@@ -425,141 +381,119 @@ class Analyzer
         //pensive face
         if(strpos($tweets[$i]["text"], strval(😔))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
 
         //unamused face
         if(strpos($tweets[$i]["text"], strval(😒))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //disappointed face
         if(strpos($tweets[$i]["text"], strval(😞))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //persevering face
         if(strpos($tweets[$i]["text"], strval(😣))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //crying face
         if(strpos($tweets[$i]["text"], strval(😢))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //loudly crying face
         if(strpos($tweets[$i]["text"], strval(😭))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //disappointed but relieved face
         if(strpos($tweets[$i]["text"], strval(😥))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //face with open mouth and cold sweat
         if(strpos($tweets[$i]["text"], strval(😰))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //face with cold sweat
         if(strpos($tweets[$i]["text"], strval(😓))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //weary face
         if(strpos($tweets[$i]["text"], strval(😩))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //angry face
         if(strpos($tweets[$i]["text"], strval(😠))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //pouting face
         if(strpos($tweets[$i]["text"], strval(😡))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //confounded face
         if(strpos($tweets[$i]["text"], strval(😖))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //worried face
         if(strpos($tweets[$i]["text"], strval(😟))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //frowning face with open mouth
         if(strpos($tweets[$i]["text"], strval(😦))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //confused face
         if(strpos($tweets[$i]["text"], strval(😕))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //expressionless face
         if(strpos($tweets[$i]["text"], strval(😑))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //japanese goblin
         if(strpos($tweets[$i]["text"], strval(👺))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //thumbs down
         if(strpos($tweets[$i]["text"], strval(👎))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //broken heart
         if(strpos($tweets[$i]["text"], strval(💔))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //crying cat face
         if(strpos($tweets[$i]["text"], strval(😿))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }        
 
         //person frowning
         if(strpos($tweets[$i]["text"], strval(🙍))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
         }             
 
         //pouting cat face
         if(strpos($tweets[$i]["text"], strval(😾))!== false) {
             $tweets[$i]["algo_score"]--;
-            $tweets[$i]["has_algo_score"] = 1;
-        }        
+        }  
+        $tweets[$i]["has_algo_score"] = 1;      
     }
 }
 ?>
