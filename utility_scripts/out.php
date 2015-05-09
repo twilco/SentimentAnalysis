@@ -18,7 +18,10 @@ $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password()
 $analyzer = new Analyzer();
 
 // $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
-// $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
+$dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
+
+print_r($dictionary);
+
 
 // $tweets = array(array());
 //             $tweets[0]["twitter_id"] = 1111;
@@ -32,11 +35,11 @@ $analyzer = new Analyzer();
 
 
            
-$tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
-$analyzer->analyze_emojis($tweets);
-for($i = 0; $i < count($tweets); $i++) {
-    echo $tweets[$i]["algo_score"] . '<br>';
-}
+// $tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
+// $analyzer->analyze_emojis($tweets);
+// for($i = 0; $i < count($tweets); $i++) {
+//     echo $tweets[$i]["algo_score"] . '<br>';
+// }
 
 
 //echo $sentiment_db->save_new_tweets($tweets);
