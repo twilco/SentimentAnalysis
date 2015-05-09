@@ -2,6 +2,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+ini_set('max_execution_time', 1800);
 
 require_once("/var/www/Sentiment_Analysis/TweetDataGenerator.php");
 require_once("/var/www/Sentiment_Analysis/TweetSanitizer.php");
@@ -19,9 +20,7 @@ $analyzer = new Analyzer();
 
 // $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
 $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
-
-print_r($dictionary);
-
+// print_r($dictionary);
 
 // $tweets = array(array());
 //             $tweets[0]["twitter_id"] = 1111;
@@ -31,16 +30,13 @@ print_r($dictionary);
 //             $tweets[0]["has_algo_score"] = 0;
 //             $tweets[0]["has_baseline_score"] = 0;
 //             $tweets[0]["is_sanitized"] = 1;
-
-
-
            
-// $tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
-// $analyzer->analyze_emojis($tweets);
-// for($i = 0; $i < count($tweets); $i++) {
-//     echo $tweets[$i]["algo_score"] . '<br>';
-// }
-
+$tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
+$analyzer->analyze_emojis($tweets);
+$analyzer->analyze_dictionary($tweets, $dictionary);
+for($i = 0; $i < count($tweets); $i++) {
+    echo $tweets[$i]["algo_score"] . '<br>';
+}
 
 //echo $sentiment_db->save_new_tweets($tweets);
 
