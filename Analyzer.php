@@ -238,6 +238,132 @@ class Analyzer
             if(strpos($tweets[$i]["text"], strval(👍))!== false) {
                 $tweets[$i]["algo_score"]++;
                 $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //kiss mark
+            if(strpos($tweets[$i]["text"], strval(💋))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //thumbs up
+            if(strpos($tweets[$i]["text"], strval(👍))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //love letter
+            if(strpos($tweets[$i]["text"], strval(💌))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //heart with arrow
+            if(strpos($tweets[$i]["text"], strval(💘))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //revolving hearts
+            if(strpos($tweets[$i]["text"], strval(💞))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //sparkling heart
+            if(strpos($tweets[$i]["text"], strval(💖))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //two hearts
+            if(strpos($tweets[$i]["text"], strval(💕))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //beating heart
+            if(strpos($tweets[$i]["text"], strval(💓))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //growing heart
+            if(strpos($tweets[$i]["text"], strval(💗))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //heavy black heart (picture is red though)
+            if(strpos($tweets[$i]["text"], strval(❤))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //green heart
+            if(strpos($tweets[$i]["text"], strval(💚))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //purple heart
+            if(strpos($tweets[$i]["text"], strval(💜))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //blue heart
+            if(strpos($tweets[$i]["text"], strval(💙))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //yellow heart
+            if(strpos($tweets[$i]["text"], strval(💛))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //bride with veil
+            if(strpos($tweets[$i]["text"], strval(👰))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //hair cut
+            if(strpos($tweets[$i]["text"], strval(💇))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //couple with heart
+            if(strpos($tweets[$i]["text"], strval(💑))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //kiss
+            if(strpos($tweets[$i]["text"], strval(💏))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //family
+            if(strpos($tweets[$i]["text"], strval(👪))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //man and woman holding hands
+            if(strpos($tweets[$i]["text"], strval(👫))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //cat face with tears of joy
+            if(strpos($tweets[$i]["text"], strval(😹))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
             }
         }
     }
@@ -380,6 +506,12 @@ class Analyzer
 
         //person frowning
         if(strpos($tweets[$i]["text"], strval(🙍))!== false) {
+            $tweets[$i]["algo_score"]--;
+            $tweets[$i]["has_algo_score"] = 1;
+        }             
+
+        //pouting cat face
+        if(strpos($tweets[$i]["text"], strval(😾))!== false) {
             $tweets[$i]["algo_score"]--;
             $tweets[$i]["has_algo_score"] = 1;
         }        
