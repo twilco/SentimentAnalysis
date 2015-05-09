@@ -53,17 +53,207 @@ class Analyzer
      * @param  array $tweets  Tweets to analyze 
      * @return array          Tweets with their newly modified scores
      */
-    public function analyze_emojis($tweets)
+    public function analyze_emojis(&$tweets)
+    {
+        $this->analyze_positive_emojis($tweets);
+        $this->analyze_negative_emojis($tweets);
+
+        return $tweets;
+    }
+
+    /**
+     * Increases sentiment score based on the presence of certain emojis.
+     * The comment descriptions are exactly as they appear on this website:
+     * http://www.iemoji.com/
+     * @param  array $tweets  Tweets to analyze 
+     * @return array          Tweets with their newly modified scores
+     */
+    public function analyze_positive_emojis(&$tweets)
     {
         for($i = 0; $i < count($tweets); $i++) {
-            //laughing crying emoji
+            //face with tears of joy
             if(strpos($tweets[$i]["text"], strval(😂))!== false) {
                 $tweets[$i]["algo_score"]++;
                 $tweets[$i]["has_algo_score"] = 1;
             }
-        }
 
-        return $tweets;
+            //smiling face with open mouth and smiling eyes
+            if(strpos($tweets[$i]["text"], strval(😄))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //smiling face with open mouth
+            if(strpos($tweets[$i]["text"], strval(😃))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //grinning mouth
+            if(strpos($tweets[$i]["text"], strval(😀))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //smiling face with smiling eyes
+            if(strpos($tweets[$i]["text"], strval(😊))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //white smiling face
+            if(strpos($tweets[$i]["text"], strval(☺)) !== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //winking face
+            if(strpos($tweets[$i]["text"], strval(😉))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }    
+
+            //smiling face with heart shaped eyes
+            if(strpos($tweets[$i]["text"], strval(😍)) !== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }        
+
+            //face throwing a kiss
+            if(strpos($tweets[$i]["text"], strval(😘)) !== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //kissing face with closed eyes
+            if(strpos($tweets[$i]["text"], strval(😚)) !== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //kissing face
+            if(strpos($tweets[$i]["text"], strval(😗))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //kissing face with smiling eyes
+            if(strpos($tweets[$i]["text"], strval(😙))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //relieved face
+            if(strpos($tweets[$i]["text"], strval(😌))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //smiling face with open mouth and tightly closed eyes
+            if(strpos($tweets[$i]["text"], strval(😆))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+
+            //face savoring delicious food
+            if(strpos($tweets[$i]["text"], strval(😋))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //smiling face with sunglasses
+            if(strpos($tweets[$i]["text"], strval(😎))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //smiling face with halo
+            if(strpos($tweets[$i]["text"], strval(😇))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //smirking face
+            if(strpos($tweets[$i]["text"], strval(😏))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //man with gua pi mao
+            if(strpos($tweets[$i]["text"], strval(👲))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            //man with turban
+            if(strpos($tweets[$i]["text"], strval(👳))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }            
+
+            
+
+            //baby
+            if(strpos($tweets[$i]["text"], strval(👶))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //boy
+            if(strpos($tweets[$i]["text"], strval(👦))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //girl
+            if(strpos($tweets[$i]["text"], strval(👧))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //person with blond hair
+            if(strpos($tweets[$i]["text"], strval(👱))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //smiling cat face with open mouth
+            if(strpos($tweets[$i]["text"], strval(😺))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //smiling cat face with heart shaped eyes
+            if(strpos($tweets[$i]["text"], strval(😻))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //kissing cat face with closed eyes
+            if(strpos($tweets[$i]["text"], strval(😽))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+
+            //thumbs up
+            if(strpos($tweets[$i]["text"], strval(👍))!== false) {
+                $tweets[$i]["algo_score"]++;
+                $tweets[$i]["has_algo_score"] = 1;
+            }
+        }
+    }
+
+    /**
+     * Decreases sentiment score based on the presence of certain emojis.
+     * The comment descriptions are exactly as they appear on this website:
+     * http://www.iemoji.com/
+     * @param  array $tweets  Tweets to analyze 
+     * @return array          Tweets with their newly modified scores
+     */
+    public function analyze_negative_emojis(&$tweets)
+    {
+
     }
 }
 ?>

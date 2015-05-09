@@ -144,15 +144,13 @@ class TweetDataGenerator
         $raw_tweet_data = json_decode($raw_tweet_data);
 
         for($i = 0; $i < count($raw_tweet_data); $i++) {
-            if($raw_tweet_data[$i]->lang == "en") {
-                $tweets[$i]["twitter_id"] = $raw_tweet_data[$i]->id_str;
-                $tweets[$i]["text"] = $tweet_sanitizer->complete_sanitization($raw_tweet_data[$i]->text);
-                $tweets[$i]["algo_score"] = 0;
-                $tweets[$i]["baseline_score"] = 0;
-                $tweets[$i]["has_algo_score"] = 0;
-                $tweets[$i]["has_baseline_score"] = 0;
-                $tweets[$i]["is_sanitized"] = 1;
-            }
+            $tweets[$i]["twitter_id"] = $raw_tweet_data[$i]->id_str;
+            $tweets[$i]["text"] = $tweet_sanitizer->complete_sanitization($raw_tweet_data[$i]->text);
+            $tweets[$i]["algo_score"] = 0;
+            $tweets[$i]["baseline_score"] = 0;
+            $tweets[$i]["has_algo_score"] = 0;
+            $tweets[$i]["has_baseline_score"] = 0;
+            $tweets[$i]["is_sanitized"] = 1;
         }
 
         return $tweets;
