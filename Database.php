@@ -194,6 +194,51 @@ class Database
     }
 
     /**
+     * Check to see if a tweet exists in the database, searching by the id assigned to the tweet by the Tweets table auto increment.
+     * @param  Integer $id    ID of the tweet assigned by the Tweets table auto increment
+     * @return Boolean        True if the tweet already exists in the database, false if it doesn't or you aren't connected to the database.
+     */
+    public function tweet_exists_by_id($id)
+    {
+        if($this->is_connected($this->connection)) {
+            $select_statement = $this->connection->prepare("SELECT text
+                                                            FROM Tweets
+                                                            WHERE id = ?");
+            $select_statement->bind_param("s", $id);
+            $select_statement->execute();
+            $select_statement->store_result();
+            if($select_statement->num_rows() == 0) {
+                return false;
+            }
+            return true;
+        } 
+        return false;
+    }
+
+    /**
+     * Check to see if a tweet exists in the database, searching by the id assigned to the tweet by Twitter.
+     * @param  Integer $twitter_id ID of the tweet assigned by Twitter
+     * @return Boolean             True if the tweet already exists in the database, false if it doesn't or you aren't connected to the database.
+     */
+    public function tweet_exists_by_twitter_id($twitter_id)
+    {
+        if($this->is_connected($this->connection)) {
+            $select_statement = $this->connection->prepare("SELECT text
+                                                            FROM Tweets
+                                                            WHERE twitter_id = ?");
+            $select_statement->bind_param("s", $twitter_id);
+            $select_statement->execute();
+            $select_statement->store_result();
+            if($select_statement->num_rows() == 0) {
+                return false;
+            }
+            return true;
+            
+        } 
+        return false;
+    }
+
+    /**
      * Gets the text of all tweets in the database, sanitized or unsanitized.
      * @return array An array of the text of all tweets in the database.
      */
