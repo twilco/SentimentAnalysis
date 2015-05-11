@@ -491,6 +491,31 @@ class Database
         } 
         return false;
     }
+
+    /**
+     * Grabs the text and twitter id of all tweets from the database and writes them to a file in JSON format.
+     * @param  String $file_name File name/path to write to on the server
+     * @return Boolean True if the operation was successful, false if it wasn't
+     */
+    public function db_tweet_text_to_json_file($file_name)
+    {
+        if($this->is_connected($this->connection)) {
+            $tweets = array();
+            $select_statement = $this->connection->prepare("SELECT twitter_id, text
+                                                            FROM Tweets");
+            $select_statement->execute();
+            $select_statement->bind_result($twitter_id, $text);
+            $counter = 0;
+            while($select_statement->fetch()) {
+                $tweets[$counter++]["twitter_id"] = $twitter_id;
+                $tweets[$counter++]["text"] = $text;
+            }
+            $select_statement->close();
+            file_put_contents($file_name, json_encode($tweets));
+            return true;
+        } 
+        return false;
+    }
 }
 
 ?>
