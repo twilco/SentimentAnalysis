@@ -348,15 +348,21 @@ class Database
     {
         if($this->is_connected($this->connection)) {
             $return_array = array();
-            $select_statement = $this->connection->prepare("SELECT *
+            $select_statement = $this->connection->prepare("SELECT id, twitter_id, text, algo_score, has_algo_score, baseline_score, has_baseline_score, is_sanitized
                                                             FROM Tweets
                                                             WHERE is_sanitized = 1");
             $select_statement->execute();
-            $select_statement->bind_result($id, $text);
+            $select_statement->bind_result($id, $twitter_id, $text, $algo_score, $has_algo_score, $baseline_score, $has_baseline_score, $is_sanitized);
             $counter = 0;
             while($select_statement->fetch()) {
-                $return_array[$counter++]["text"] = $text;
                 $return_array[$counter++]["id"] = $id;
+                $return_array[$counter++]["twitter_id"] = $twitter_id;
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["algo_score"] = $algo_score;
+                $return_array[$counter++]["has_algo_score"] = $has_algo_score;
+                $return_array[$counter++]["baseline_score"] = $baseline_score;
+                $return_array[$counter++]["has_baseline_score"] = $has_baseline_score;
+                $return_array[$counter++]["is_sanitized"] = $is_sanitized;
             }
             $select_statement->close();
             return $return_array;
@@ -372,15 +378,21 @@ class Database
     {
         if($this->is_connected($this->connection)) {
             $return_array = array();
-            $select_statement = $this->connection->prepare("SELECT *
+            $select_statement = $this->connection->prepare("SELECT id, twitter_id, text, algo_score, has_algo_score, baseline_score, has_baseline_score, is_sanitized
                                                             FROM Tweets
                                                             WHERE is_sanitized = 0");
             $select_statement->execute();
-            $select_statement->bind_result($id, $text);
+            $select_statement->bind_result($id, $twitter_id, $text, $algo_score, $has_algo_score, $baseline_score, $has_baseline_score, $is_sanitized);
             $counter = 0;
             while($select_statement->fetch()) {
-                $return_array[$counter++]["text"] = $text;
                 $return_array[$counter++]["id"] = $id;
+                $return_array[$counter++]["twitter_id"] = $twitter_id;
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["algo_score"] = $algo_score;
+                $return_array[$counter++]["has_algo_score"] = $has_algo_score;
+                $return_array[$counter++]["baseline_score"] = $baseline_score;
+                $return_array[$counter++]["has_baseline_score"] = $has_baseline_score;
+                $return_array[$counter++]["is_sanitized"] = $is_sanitized;
             }
             $select_statement->close();
             return $return_array;
@@ -396,14 +408,20 @@ class Database
     {
         if($this->is_connected($this->connection)) {
             $return_array = array();
-            $select_statement = $this->connection->prepare("SELECT *
+            $select_statement = $this->connection->prepare("SELECT id, twitter_id, text, algo_score, has_algo_score, baseline_score, has_baseline_score, is_sanitized
                                                             FROM Tweets");
             $select_statement->execute();
-            $select_statement->bind_result($id, $text);
+            $select_statement->bind_result($id, $twitter_id, $text, $algo_score, $has_algo_score, $baseline_score, $has_baseline_score, $is_sanitized);
             $counter = 0;
             while($select_statement->fetch()) {
-                $return_array[$counter++]["text"] = $text;
                 $return_array[$counter++]["id"] = $id;
+                $return_array[$counter++]["twitter_id"] = $twitter_id;
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["algo_score"] = $algo_score;
+                $return_array[$counter++]["has_algo_score"] = $has_algo_score;
+                $return_array[$counter++]["baseline_score"] = $baseline_score;
+                $return_array[$counter++]["has_baseline_score"] = $has_baseline_score;
+                $return_array[$counter++]["is_sanitized"] = $is_sanitized;
             }
             $select_statement->close();
             return $return_array;
@@ -440,6 +458,30 @@ class Database
             }
             return true;
         }
+        return false;
+    }
+
+    /**
+     * Grabs all tweets from the database and writes them to a file in JSON format.
+     * @param  String $file_name File name/path to write to on the server
+     * @return Boolean True if the operation was successful, false if it wasn't
+     */
+    public function db_tweets_to_json_file($file_name)
+    {
+        if($this->is_connected($this->connection)) {
+            $return_array = array();
+            $select_statement = $this->connection->prepare("SELECT *
+                                                            FROM Tweets");
+            $select_statement->execute();
+            $select_statement->bind_result($id, $text);
+            $counter = 0;
+            while($select_statement->fetch()) {
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["id"] = $id;
+            }
+            $select_statement->close();
+            return $return_array;
+        } 
         return false;
     }
 }
