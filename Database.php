@@ -69,6 +69,13 @@ class Database
             foreach($tweets as $tweet) {
                 if($this->tweet_exists_by_twitter_id($tweet["twitter_id"])) {
                     //tweet already exists - let's do an update rather than an insert
+                    $update_query = "UPDATE Tweets 
+                                     SET text = ?, algo_score = ?, has_algo_score = ?, baseline_score = ?, has_baseline_score = ?, is_sanitized = ?
+                                     WHERE twitter_id = ?";
+                    $prepared_update = mysqli_prepare($this->connection, $update_query);
+                    mysqli_stmt_bind_param($prepared_update, "sssssss", $tweet['text'], $tweet['algo_score'], $tweet['has_algo_score'], $tweet['baseline_score'], $tweet['has_baseline_score'], $tweet['is_sanitized'], $tweet['tweet_id']);
+                    mysqli_execute($prepared_update) or die(mysqli_error($this->connection));
+                    $prepared_update->close();
                 } else {
                     //tweet doesn't already previously exist - let's do an insert
                     $insert_query = "INSERT INTO `Tweets`(`twitter_id`, `text`, `algo_score`, `has_algo_score`, `baseline_score`, `has_baseline_score`, `is_sanitized`)
@@ -81,8 +88,6 @@ class Database
 
                     //Bind the parameters into the query
                     mysqli_stmt_bind_param($prepared_query, 'sssssss', $tweet["twitter_id"], $tweet["text"], $tweet["algo_score"], $tweet["has_algo_score"], $tweet["baseline_score"], $tweet["has_baseline_score"], $tweet["is_sanitized"]);
-
-                    //Run the query
                     mysqli_execute($prepared_query) or die(mysqli_error($this->connection));
                     $prepared_query->close();
                 }
