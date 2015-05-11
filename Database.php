@@ -397,8 +397,7 @@ class Database
         if($this->is_connected($this->connection)) {
             $return_array = array();
             $select_statement = $this->connection->prepare("SELECT *
-                                                            FROM Tweets
-                                                            WHERE is_sanitized = 0");
+                                                            FROM Tweets");
             $select_statement->execute();
             $select_statement->bind_result($id, $text);
             $counter = 0;
