@@ -81,7 +81,7 @@ class Analyzer
 
     /**
      * Performs a complete sentiment analyzation and then stores the tweets with their new sentiment scores in the database.
-     * @param  array &$tweets  Array of tweets, passed in by reference, which get their sentiment score analyzed
+     * @param  array &$tweets  Array of tweets, passed in by reference, which get their sentiment score modified
      */
     public function complete_analyzation_and_save(&$tweets)
     {

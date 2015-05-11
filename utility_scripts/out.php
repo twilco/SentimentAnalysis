@@ -18,8 +18,10 @@ $dictionary_inst = new Dictionary();
 $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password(), "SENTIMENT_ANALYSIS");
 $analyzer = new Analyzer();
 
+//$sentiment_db->save_tweets($tweet_data_generator->sanitized_timeline_tweets_to_array("Sethrogen"));
+
 // $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
-$dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
+//$dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
 // print_r($dictionary);
 
 // $tweets = array(array());
@@ -38,12 +40,12 @@ $dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis
 
 
 
-$tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
-$analyzer->analyze_emojis($tweets);
-$analyzer->analyze_dictionary($tweets, $dictionary);
-for($i = 0; $i < count($tweets); $i++) {
-    echo 'SCORE: ' . $tweets[$i]["algo_score"] . '      -----------------  TEXT: ' . $tweets[$i]["text"] . '<br>';
-}
+// $tweets = $tweet_data_generator->sanitized_timeline_tweets_to_array("Roedl3", 200);
+// $analyzer->analyze_emojis($tweets);
+// $analyzer->analyze_dictionary($tweets, $dictionary);
+// for($i = 0; $i < count($tweets); $i++) {
+//     echo 'SCORE: ' . $tweets[$i]["algo_score"] . '      -----------------  TEXT: ' . $tweets[$i]["text"] . '<br>';
+// }
 
 
 
