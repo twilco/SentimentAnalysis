@@ -69,33 +69,50 @@ class Database
             foreach($tweets as $tweet) {
                 if($this->tweet_exists_by_twitter_id($tweet["twitter_id"])) {
                     //tweet already exists - let's do an update rather than an insert
-                    $update_query = "UPDATE Tweets 
-                                     SET text = ?, algo_score = ?, has_algo_score = ?, baseline_score = ?, has_baseline_score = ?, is_sanitized = ?
-                                     WHERE twitter_id = ?";
-                    $prepared_update = mysqli_prepare($this->connection, $update_query);
-                    mysqli_stmt_bind_param($prepared_update, "sssssss", $tweet['text'], $tweet['algo_score'], $tweet['has_algo_score'], $tweet['baseline_score'], $tweet['has_baseline_score'], $tweet['is_sanitized'], $tweet['tweet_id']);
-                    mysqli_execute($prepared_update) or die(mysqli_error($this->connection));
-                    $prepared_update->close();
+                    $this->update_tweet($tweet);
                 } else {
-                    //tweet doesn't already previously exist - let's do an insert
-                    $insert_query = "INSERT INTO `Tweets`(`twitter_id`, `text`, `algo_score`, `has_algo_score`, `baseline_score`, `has_baseline_score`, `is_sanitized`)
-                                     VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-                    $prepared_query = mysqli_prepare($this->connection, $insert_query);
-                    if(!$prepared_query) {
-                        die("Mysqli error:" . mysql_error($this->connection));
-                    }
-
-                    //Bind the parameters into the query
-                    mysqli_stmt_bind_param($prepared_query, 'sssssss', $tweet["twitter_id"], $tweet["text"], $tweet["algo_score"], $tweet["has_algo_score"], $tweet["baseline_score"], $tweet["has_baseline_score"], $tweet["is_sanitized"]);
-                    mysqli_execute($prepared_query) or die(mysqli_error($this->connection));
-                    $prepared_query->close();
+                    //tweet doesn't already exist - let's do an insert
+                    $this->insert_new_tweet($tweet);
                 }
-                
             }
             return true;
         } 
         return false;
+    }
+
+    /**
+     * Inserts a new tweet into the database.
+     * @param  array $tweet   Expects an associative array with the following fields: 'twitter_id', 'text', 'algo_score', 'has_algo_score', 'baseline_score', 'has_baseline_score', 'is_sanitized'
+     */
+    public function insert_new_tweet($tweet)
+    {
+        $insert_query = "INSERT INTO `Tweets`(`twitter_id`, `text`, `algo_score`, `has_algo_score`, `baseline_score`, `has_baseline_score`, `is_sanitized`)
+                         VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $prepared_query = mysqli_prepare($this->connection, $insert_query);
+        if(!$prepared_query) {
+            die("Mysqli error:" . mysql_error($this->connection));
+        }
+
+        //Bind the parameters into the query
+        mysqli_stmt_bind_param($prepared_query, 'sssssss', $tweet["twitter_id"], $tweet["text"], $tweet["algo_score"], $tweet["has_algo_score"], $tweet["baseline_score"], $tweet["has_baseline_score"], $tweet["is_sanitized"]);
+        mysqli_execute($prepared_query) or die(mysqli_error($this->connection));
+        $prepared_query->close();
+    }
+
+    /**
+     * Updates a tweet in the database
+     * @param  array $tweet   Expects an associative array with the following fields: 'twitter_id', 'text', 'algo_score', 'has_algo_score', 'baseline_score', 'has_baseline_score', 'is_sanitized'
+     */
+    public function update_tweet($tweet)
+    {
+        $update_query = "UPDATE Tweets 
+                         SET text = ?, algo_score = ?, has_algo_score = ?, baseline_score = ?, has_baseline_score = ?, is_sanitized = ?
+                         WHERE twitter_id = ?";
+        $prepared_update = mysqli_prepare($this->connection, $update_query);
+        mysqli_stmt_bind_param($prepared_update, "sssssss", $tweet['text'], $tweet['algo_score'], $tweet['has_algo_score'], $tweet['baseline_score'], $tweet['has_baseline_score'], $tweet['is_sanitized'], $tweet['tweet_id']);
+        mysqli_execute($prepared_update) or die(mysqli_error($this->connection));
+        $prepared_update->close();
     }
 
     /**
