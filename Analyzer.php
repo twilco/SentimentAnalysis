@@ -1,4 +1,6 @@
 <?php
+require_once('/var/www/Sentiment_Analysis/Database.php');
+require_once("/var/www/Sentiment_Analysis/config.php");
 /**
  * The main goal for this class is to implement several analysis methods to 
  * give a sentiment score to each of the tweets passed into it.
@@ -75,6 +77,18 @@ class Analyzer
     {
         $this->analyze_emojis($tweets);
         $this->analyze_dictionary($tweets);
+    }
+
+    /**
+     * Performs a complete sentiment analyzation and then stores the tweets with their new sentiment scores in the database.
+     * @param  array &$tweets  Array of tweets, passed in by reference, which get their sentiment score analyzed
+     */
+    public function complete_analyzation_and_save(&$tweets)
+    {
+        $database = new Database(get_db_host(), get_db_username(), get_db_password(), "SENTIMENT_ANALYSIS");
+        $this->analyze_emojis($tweets);
+        $this->analyze_dictionary($tweets);
+        $database->save_tweets($tweets);
     }
 
     /**

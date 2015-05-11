@@ -1,7 +1,9 @@
 <?php
-
 require_once("/var/www/Sentiment_Analysis/TweetSanitizer.php");
 
+/**
+ * This class handles all database interaction for this application.
+ */
 class Database
 {
     private $connection = "";
