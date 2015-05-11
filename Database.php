@@ -342,7 +342,7 @@ class Database
 
     /**
      * Gets all information on all sanitized tweets in the database.
-     * @return array Text of all unsanitized tweets
+     * @return array All database fields of all sanitized tweets.
      */
     public function get_all_sanitized_tweets()
     {
@@ -351,6 +351,54 @@ class Database
             $select_statement = $this->connection->prepare("SELECT *
                                                             FROM Tweets
                                                             WHERE is_sanitized = 1");
+            $select_statement->execute();
+            $select_statement->bind_result($id, $text);
+            $counter = 0;
+            while($select_statement->fetch()) {
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["id"] = $id;
+            }
+            $select_statement->close();
+            return $return_array;
+        } 
+        return false;
+    }
+
+    /**
+     * Gets all information on all unsanitized tweets in the database.
+     * @return array All database fields of all unsanitized tweets.
+     */
+    public function get_all_unsanitized_tweets()
+    {
+        if($this->is_connected($this->connection)) {
+            $return_array = array();
+            $select_statement = $this->connection->prepare("SELECT *
+                                                            FROM Tweets
+                                                            WHERE is_sanitized = 0");
+            $select_statement->execute();
+            $select_statement->bind_result($id, $text);
+            $counter = 0;
+            while($select_statement->fetch()) {
+                $return_array[$counter++]["text"] = $text;
+                $return_array[$counter++]["id"] = $id;
+            }
+            $select_statement->close();
+            return $return_array;
+        } 
+        return false;
+    }
+
+    /**
+     * Gets all information on all tweets in the database.
+     * @return array All database fields of all tweets.
+     */
+    public function get_all_tweets()
+    {
+        if($this->is_connected($this->connection)) {
+            $return_array = array();
+            $select_statement = $this->connection->prepare("SELECT *
+                                                            FROM Tweets
+                                                            WHERE is_sanitized = 0");
             $select_statement->execute();
             $select_statement->bind_result($id, $text);
             $counter = 0;
