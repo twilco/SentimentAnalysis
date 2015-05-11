@@ -469,18 +469,25 @@ class Database
     public function db_tweets_to_json_file($file_name)
     {
         if($this->is_connected($this->connection)) {
-            $return_array = array();
-            $select_statement = $this->connection->prepare("SELECT *
+            $tweets = array();
+            $select_statement = $this->connection->prepare("SELECT id, twitter_id, text, algo_score, has_algo_score, baseline_score, has_baseline_score, is_sanitized
                                                             FROM Tweets");
             $select_statement->execute();
-            $select_statement->bind_result($id, $text);
+            $select_statement->bind_result($id, $twitter_id, $text, $algo_score, $has_algo_score, $baseline_score, $has_baseline_score, $is_sanitized);
             $counter = 0;
             while($select_statement->fetch()) {
-                $return_array[$counter++]["text"] = $text;
-                $return_array[$counter++]["id"] = $id;
+                $tweets[$counter++]["id"] = $id;
+                $tweets[$counter++]["twitter_id"] = $twitter_id;
+                $tweets[$counter++]["text"] = $text;
+                $tweets[$counter++]["algo_score"] = $algo_score;
+                $tweets[$counter++]["has_algo_score"] = $has_algo_score;
+                $tweets[$counter++]["baseline_score"] = $baseline_score;
+                $tweets[$counter++]["has_baseline_score"] = $has_baseline_score;
+                $tweets[$counter++]["is_sanitized"] = $is_sanitized;
             }
             $select_statement->close();
-            return $return_array;
+            file_put_contents($file_name, json_encode($tweets));
+            return true;
         } 
         return false;
     }
