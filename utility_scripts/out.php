@@ -19,7 +19,9 @@ $sentiment_db = new Database(get_db_host(), get_db_username(), get_db_password()
 $analyzer = new Analyzer();
 
 //$sentiment_db->save_tweets($tweet_data_generator->sanitized_timeline_tweets_to_array("Sethrogen"));
-echo $sentiment_db->db_tweets_to_json_file("/home/pi/test.json");
+//echo $sentiment_db->db_tweets_to_json_file("/home/pi/test.json");
+$tweets = $sentiment_db->get_all_tweets();
+$analyzer->complete_analyzation_and_save($tweets);
 // $tweets = $tweet_sanitizer->file_read_tokenize_sanitize("/home/pi/twitter_data.txt", "~~~~");
 //$dictionary = $dictionary_inst->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
 // print_r($dictionary);

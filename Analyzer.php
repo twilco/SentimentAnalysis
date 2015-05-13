@@ -1,5 +1,6 @@
 <?php
 require_once('/var/www/Sentiment_Analysis/Database.php');
+require_once('/var/www/Sentiment_Analysis/Dictionary.php');
 require_once("/var/www/Sentiment_Analysis/config.php");
 /**
  * The main goal for this class is to implement several analysis methods to 
@@ -86,8 +87,10 @@ class Analyzer
     public function complete_analyzation_and_save(&$tweets)
     {
         $database = new Database(get_db_host(), get_db_username(), get_db_password(), "SENTIMENT_ANALYSIS");
+        $dictionary = new Dictionary();
+        $lsd_dictionary = $dictionary->read_LSD_dictionary();
         $this->analyze_emojis($tweets);
-        $this->analyze_dictionary($tweets);
+        $this->analyze_dictionary($tweets, $lsd_dictionary);
         $database->save_tweets($tweets);
     }
 
@@ -124,6 +127,11 @@ class Analyzer
     {
         $this->analyze_positive_emojis($tweets);
         $this->analyze_negative_emojis($tweets);
+    }
+
+    public function compare_baseline_to_algo()
+    {
+
     }
 
     /**
