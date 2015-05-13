@@ -2,3 +2,5 @@ config.php
 sftp-config.json
 twitter_data.txt
 dictionary/LSD2011.txt
+utility_scripts/give_baseline_scores.php
+jQueryPosts.php
