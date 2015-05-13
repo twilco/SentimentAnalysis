@@ -74,6 +74,7 @@ class Database
                     $this->update_tweet($tweet);
                 } else {
                     //tweet doesn't already exist - let's do an insert
+                    echo 'insert';
                     $this->insert_new_tweet($tweet);
                 }
             }
@@ -108,13 +109,16 @@ class Database
      */
     public function update_tweet($tweet)
     {
-        $update_query = "UPDATE Tweets 
-                         SET text = ?, algo_score = ?, has_algo_score = ?, baseline_score = ?, has_baseline_score = ?, is_sanitized = ?
-                         WHERE twitter_id = ?";
-        $prepared_update = mysqli_prepare($this->connection, $update_query);
-        mysqli_stmt_bind_param($prepared_update, "sssssss", $tweet['text'], $tweet['algo_score'], $tweet['has_algo_score'], $tweet['baseline_score'], $tweet['has_baseline_score'], $tweet['is_sanitized'], $tweet['tweet_id']);
-        mysqli_execute($prepared_update) or die(mysqli_error($this->connection));
-        $prepared_update->close();
+        if($this->is_connected($this->connection)) {
+            $prepared_update = $this->connection->prepare("UPDATE Tweets 
+                             SET `text` = ?, `algo_score` = ?, `has_algo_score` = ?, `baseline_score` = ?, `has_baseline_score` = ?, `is_sanitized` = ?
+                             WHERE `twitter_id` = ?");
+            mysqli_stmt_bind_param($prepared_update, "sssssss", $tweet['text'], $tweet['algo_score'], $tweet['has_algo_score'], $tweet['baseline_score'], $tweet['has_baseline_score'], $tweet['is_sanitized'], $tweet['twitter_id']);
+            mysqli_execute($prepared_update) or die(mysqli_error($this->connection));
+            $prepared_update->close();
+        } else {
+            echo 'Not connected when trying to call Database->update_tweet()';
+        }
     }
 
     /**

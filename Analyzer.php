@@ -73,11 +73,15 @@ class Analyzer
     /**
      * Performs all analysis operations on the passed in (by reference) tweets.
      * @param  StringArray &$tweets Tweets, passed in by reference, which get their sentiment score modified
+     * @return StringArray $tweets  Tweets with their newly modified algo_score fields.
      */
     public function complete_analyzation(&$tweets)
     {
+        $dictionary = new Dictionary();
+        $lsd_dictionary = $dictionary->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
         $this->analyze_emojis($tweets);
-        $this->analyze_dictionary($tweets);
+        $this->analyze_dictionary($tweets, $lsd_dictionary);
+        return $tweets;
     }
 
     /**
@@ -88,7 +92,7 @@ class Analyzer
     {
         $database = new Database(get_db_host(), get_db_username(), get_db_password(), "SENTIMENT_ANALYSIS");
         $dictionary = new Dictionary();
-        $lsd_dictionary = $dictionary->read_LSD_dictionary();
+        $lsd_dictionary = $dictionary->read_LSD_dictionary("/var/www/Sentiment_Analysis/dictionary/LSD2011.txt", " ", "\n", "*");
         $this->analyze_emojis($tweets);
         $this->analyze_dictionary($tweets, $lsd_dictionary);
         $database->save_tweets($tweets);
